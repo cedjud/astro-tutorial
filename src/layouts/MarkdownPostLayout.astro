@@ -1,0 +1,19 @@
+---
+import Tag from "@/pages/tags/[tag].astro";
+import BaseLayout from "./BaseLayout.astro";
+import TagList from "@/components/TagList.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <img src=`${frontmatter.image.url}` alt=`${frontmatter.image.alt}` />
+  <p>Written by {frontmatter.author}</p>
+  <time>{frontmatter.pubDate.toString().slice(0, 10)}</time>
+  <ul>
+    {frontmatter.tags.map((tag) => <li class="tag">{tag}</li>)}
+  </ul>
+  <p>{frontmatter.description}</p>
+  <slot />
+  <TagList />
+</BaseLayout>
